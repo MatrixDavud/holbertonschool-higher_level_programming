@@ -4,11 +4,11 @@ def pow(a, b):
         return 1
     elif b > 0:
         temp = a
-        for i in range (b-1):
+        for i in range(b-1):
             a *= temp
         return a
     else:
         temp = a
-        for i in range (-(b)-1):
+        for i in range(-(b)-1):
             a *= temp
     return 1/a
