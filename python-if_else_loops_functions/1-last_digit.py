@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import random
 number = random.randint(-10000, 10000)
-str=""
+str = ""
 if number % 10 > 5:
     str = "and is greater than 5"
 elif number % 10 == 0:
