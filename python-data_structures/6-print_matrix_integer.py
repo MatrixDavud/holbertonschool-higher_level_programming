@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 def print_matrix_integer(matrix=[[]]):
-    for i in range(len(matrix[0])):
+    for i in range(len(matrix)):
         if i == 0:
             pass
         else:
