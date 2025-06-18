@@ -14,4 +14,4 @@ def roman_to_int(roman_string):
                 i += 1
         return value
     else:
-        return None
+        return 0 
