@@ -6,7 +6,7 @@ if __name__ == "__main__":
     try:
         if len(argv) != 4:
             print(f"Usage: {argv[0]} <a> <operator> <b>")
-            exit(1) 
+            exit(1)
         a = argv[1]
         b = argv[3]
         operator = argv[2]
