@@ -7,4 +7,3 @@ while count > 96:
     elif count % 2 == 1:
         print("{}".format(chr(count - 32)), end='')
         count -= 1
-
