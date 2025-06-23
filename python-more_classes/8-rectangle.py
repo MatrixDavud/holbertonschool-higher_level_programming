@@ -66,12 +66,11 @@ class Rectangle:
             return 2 * (self.__width + self.__height)
 
     def __str__(self):
-        """Return string with the value of print_symbol in the size of rectangle."""
+        """Return string of # s in the size of rectangle."""
         if self.__width == 0 or self.__height == 0:
             return ''
         else:
-            lines = [str(self.print_symbol) * self.__width
-                     for _ in range(self.__height)]
+            lines = ["#" * self.__width for _ in range(self.__height)]
             return "\n".join(lines)
 
     def __repr__(self):
@@ -82,3 +81,16 @@ class Rectangle:
         """Display message after deleting the object."""
         print("Bye rectangle...")
         Rectangle.number_of_instances -= 1
+
+    @staticmethod
+    def bigger_or_equal(rect_1, rect_2):
+        """Compare rect_1 and rect_2 and return the one with bigger area."""
+        if not isinstance(rect_1, Rectangle):
+            raise TypeError("rect_1 must be an instance of Rectangle")
+        elif not isinstance(rect_2, Rectangle):
+            raise TypeError("rect_2 must be an instance of Rectangle")
+        else:
+            if rect_1.area() >= rect_2.area():
+                return rect_1
+            else:
+                return rect_2
