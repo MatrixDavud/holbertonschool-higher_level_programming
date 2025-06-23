@@ -71,4 +71,4 @@ class Rectangle:
 
     def __repr__(self):
         """Return the string expression Rectangle(width, height)."""
-        return f"Rectangle({self.__width}, y={self.__height})"
+        return f"Rectangle({self.__width}, {self.__height})"
