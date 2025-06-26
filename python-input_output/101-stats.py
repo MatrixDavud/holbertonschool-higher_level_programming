@@ -15,24 +15,25 @@ def print_stats():
         print("{}: {}".format(code, status_counts[code]))
 
 
-try:
-    for line in sys.stdin:
-        line_counter += 1
-        parts = line.strip().split()
+if __name__ == "__main__":
+    try:
+        for line in sys.stdin:
+            line_counter += 1
+            parts = line.strip().split()
 
-        try:
-            status = parts[-2]
-            size = int(parts[-1])
-            total_size += size
+            try:
+                status = parts[-2]
+                size = int(parts[-1])
+                total_size += size
 
-            if status in valid_codes:
-                status_counts[status] = status_counts.get(status, 0) + 1
-        except (IndexError, ValueError):
-            continue
+                if status in valid_codes:
+                    status_counts[status] = status_counts.get(status, 0) + 1
+            except (IndexError, ValueError):
+                continue
 
-        if line_counter % 10 == 0:
-            print_stats()
+            if line_counter % 10 == 0:
+                print_stats()
 
-except KeyboardInterrupt:
-    print_stats()
-    raise
+    except KeyboardInterrupt:
+        print_stats()
+        raise
