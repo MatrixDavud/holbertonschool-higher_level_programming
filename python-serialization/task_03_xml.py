@@ -34,11 +34,28 @@ def serialize_to_xml(dictionary, filename):
 def deserialize_from_xml(filename):
     """Deserialize an XML file into a Python dictionary."""
 
+    def type_cast(value):
+        """Cast string value to according type(xml only stores strings)."""
+        if value is None:
+            return None
+        val = value.strip()
+        if val.isdigit():
+            return int(val)
+        try:
+            return float(val)
+        except ValueError:
+            pass
+        if val.lower() == 'true':
+            return True
+        if val.lower() == 'false':
+            return False
+        return val
+
     def parse_element(elem):
         """Parse each elements of the xml tree."""
         children = list(elem)
         if not children:
-            return elem.text
+            return type_cast(elem.text)
 
         grouped = defaultdict(list)
         for child in children:
