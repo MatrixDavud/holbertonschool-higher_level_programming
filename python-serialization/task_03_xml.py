@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Serializing and Deserializing XML files."""
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as elementTree
 from collections import defaultdict
 
 
@@ -10,7 +10,7 @@ def serialize_to_xml(dictionary, filename):
     def build_xml_element(parent, key, value):
         """Build xml elements to create and write the tree to xml file."""
         if isinstance(value, dict):
-            child = ET.SubElement(parent, key)
+            child = elementTree.SubElement(parent, key)
             for k, v in value.items():
                 build_xml_element(child, k, v)
 
@@ -19,43 +19,26 @@ def serialize_to_xml(dictionary, filename):
                 build_xml_element(parent, key, item)
 
         else:
-            child = ET.SubElement(parent, key)
+            child = elementTree.SubElement(parent, key)
             child.text = str(value)
 
-    root = ET.Element("data")
+    root = elementTree.Element("data")
 
     for k, v in dictionary.items():
         build_xml_element(root, k, v)
 
-    tree = ET.ElementTree(root)
+    tree = elementTree.ElementTree(root)
     tree.write(filename, encoding="utf-8", xml_declaration=True)
 
 
 def deserialize_from_xml(filename):
     """Deserialize an XML file into a Python dictionary."""
 
-    def type_cast(value):
-        """Cast string value to according type(xml only stores strings)."""
-        if value is None:
-            return None
-        val = value.strip()
-        if val.isdigit():
-            return int(val)
-        try:
-            return float(val)
-        except ValueError:
-            pass
-        if val.lower() == 'true':
-            return True
-        if val.lower() == 'false':
-            return False
-        return val
-
     def parse_element(elem):
         """Parse each elements of the xml tree."""
         children = list(elem)
         if not children:
-            return type_cast(elem.text)
+            return elem.text
 
         grouped = defaultdict(list)
         for child in children:
@@ -69,7 +52,7 @@ def deserialize_from_xml(filename):
                 result[tag] = values
         return result
 
-    tree = ET.parse(filename)
-    root = tree.getroot()
+    tree = elementTree.parse(filename)
+    root = tree.gelementTreeroot()
 
     return parse_element(root)
