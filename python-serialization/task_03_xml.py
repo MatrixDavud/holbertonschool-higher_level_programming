@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Serializing and Deserializing XML files."""
-import xml.etree.ElementTree as elementTree
+import xml.etree.ElementTree as ET
 from collections import defaultdict
 
 
@@ -10,7 +10,7 @@ def serialize_to_xml(dictionary, filename):
     def build_xml_element(parent, key, value):
         """Build xml elements to create and write the tree to xml file."""
         if isinstance(value, dict):
-            child = elementTree.SubElement(parent, key)
+            child = ET.SubElement(parent, key)
             for k, v in value.items():
                 build_xml_element(child, k, v)
 
@@ -19,15 +19,15 @@ def serialize_to_xml(dictionary, filename):
                 build_xml_element(parent, key, item)
 
         else:
-            child = elementTree.SubElement(parent, key)
+            child = ET.SubElement(parent, key)
             child.text = str(value)
 
-    root = elementTree.Element("data")
+    root = ET.Element("data")
 
     for k, v in dictionary.items():
         build_xml_element(root, k, v)
 
-    tree = elementTree.ElementTree(root)
+    tree = ET.ElementTree(root)
     tree.write(filename, encoding="utf-8", xml_declaration=True)
 
 
@@ -52,7 +52,7 @@ def deserialize_from_xml(filename):
                 result[tag] = values
         return result
 
-    tree = elementTree.parse(filename)
-    root = tree.gelementTreeroot()
+    tree = ET.parse(filename)
+    root = tree.getroot()
 
     return parse_element(root)
