@@ -55,4 +55,4 @@ def deserialize_from_xml(filename):
     tree = ET.parse(filename)
     root = tree.getroot()
 
-    return {root.tag: parse_element(root)}
+    return parse_element(root)
