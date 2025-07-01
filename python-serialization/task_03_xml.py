@@ -9,7 +9,6 @@ def serialize_to_xml(dictionary, filename):
 
     def build_xml_element(parent, key, value):
         """Build xml elements to create and write the tree to xml file."""
-
         child = elementTree.SubElement(parent, key)
         child.text = str(value)
 
@@ -29,7 +28,7 @@ def deserialize_from_xml(filename):
         """Parse each elements of the xml tree."""
         children = list(elem)
         if not children:
-            return elem.text
+            return {} if elem.tag == "data" else elem.text
 
         grouped = defaultdict(list)
         for child in children:
