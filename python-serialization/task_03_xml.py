@@ -9,18 +9,9 @@ def serialize_to_xml(dictionary, filename):
 
     def build_xml_element(parent, key, value):
         """Build xml elements to create and write the tree to xml file."""
-        if isinstance(value, dict):
-            child = elementTree.SubElement(parent, key)
-            for k, v in value.items():
-                build_xml_element(child, k, v)
 
-        elif isinstance(value, list):
-            for item in value:
-                build_xml_element(parent, key, item)
-
-        else:
-            child = elementTree.SubElement(parent, key)
-            child.text = str(value)
+        child = elementTree.SubElement(parent, key)
+        child.text = str(value)
 
     root = elementTree.Element("data")
 
