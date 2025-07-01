@@ -34,24 +34,24 @@ def serialize_to_xml(dictionary, filename):
 def deserialize_from_xml(filename):
     """Deserialize an XML file into a Python dictionary."""
 
-def parse_element(elem):
-    """Parse each elements of the xml tree."""
-    children = list(elem)
-    if not children:
-        return {}  # Return an empty dictionary instead of None
+    def parse_element(elem):
+        """Parse each elements of the xml tree."""
+        children = list(elem)
+        if not children:
+            return {}
 
-    grouped = defaultdict(list)
-    for child in children:
-        grouped[child.tag].append(parse_element(child))
+        grouped = defaultdict(list)
+        for child in children:
+            grouped[child.tag].append(parse_element(child))
 
-    result = {}
-    for tag, values in grouped.items():
-        if len(values) == 1:
-            result[tag] = values[0]
-        else:
-            result[tag] = values
-    return result
-    tree = elementTree.parse(filename)
-    root = tree.getroot()
+        result = {}
+        for tag, values in grouped.items():
+            if len(values) == 1:
+                result[tag] = values[0]
+            else:
+                result[tag] = values
+        return result
+        tree = elementTree.parse(filename)
+        root = tree.getroot()
 
-    return parse_element(root)
+        return parse_element(root)
