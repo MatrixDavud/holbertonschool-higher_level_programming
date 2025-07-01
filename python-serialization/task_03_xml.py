@@ -35,7 +35,7 @@ def deserialize_from_xml(filename):
     """Deserialize an XML file into a Python dictionary."""
 
     def parse_element(elem):
-        """Parse each elements of the xml tree."""
+        """Parse each element of the xml tree."""
         children = list(elem)
         if not children:
             return {}
@@ -51,7 +51,7 @@ def deserialize_from_xml(filename):
             else:
                 result[tag] = values
         return result
-        tree = elementTree.parse(filename)
-        root = tree.getroot()
 
-        return parse_element(root)
+    tree = elementTree.parse(filename)
+    root = tree.getroot()
+    return parse_element(root)
